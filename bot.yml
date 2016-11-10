@@ -1,0 +1,8 @@
+name: Break Time
+description: A Slackbot that helps coworkers take stress-releasing breaks together
+email: rodrigo@godynamo.com
+avatar: .beepboop/avatar.png
+slackscopes:
+  - bot
+  - commands
+  - reactions:write
