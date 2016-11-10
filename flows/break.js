@@ -11,6 +11,7 @@ module.exports = (slapp) => {
   slapp.command('/break', /.*/, (msg, text, match1) => {
     msg.respond({
       text: 'What would you like to do?',
+      response_type: 'in_channel',
       attachments: [
         {
           text: '',
@@ -41,7 +42,7 @@ module.exports = (slapp) => {
   })
 
   slapp.action('what_would_you_like_to_do', 'answer', (msg, val) => {
-    msg.respond('You want to play' + val)
+    msg.respond(msg.body.user.name + ' wants to play' + val)
   })
 
   slapp.event('bb.team_added', function (msg) {
