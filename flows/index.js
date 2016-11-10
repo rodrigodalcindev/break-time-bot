@@ -5,4 +5,5 @@ module.exports = (slapp) => {
   require('./help')(slapp)
   require('./whoisin')(slapp)
   require('./chatter')(slapp)
+  require('./break')(slapp)
 }
