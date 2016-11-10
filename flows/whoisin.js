@@ -3,7 +3,7 @@ const os = require('os')
 
 module.exports = (slapp) => {
 
-  slapp.command('/break', /.*/, (msg, text) => {
+  slapp.command('/inorout', /.*/, (msg, text) => {
     var lines = msg.body.text.split(os.EOL).map((it) => { return it.trim() })
     var text = lines[0] || 'In or Out?'
 
@@ -11,7 +11,7 @@ module.exports = (slapp) => {
     if (lines.length > 16) {
       msg.respond(`:sob: Sorry, you may only enter 15 options. Here is what you entered:
 
-/break ${msg.body.text}`)
+/inorout ${msg.body.text}`)
       return
     }
 

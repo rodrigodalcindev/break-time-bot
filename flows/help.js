@@ -2,9 +2,9 @@
 
 module.exports = (slapp) => {
 
-  let help = `In or Out is pretty simple. Ask question with the \`/break\` command:
+  let help = `In or Out is pretty simple. Ask question with the \`/inorout\` command:
 \`\`\`
-/break [type your question here]
+/inorout [type your question here]
 [answer 1]
 [answer 2]
 [...]
@@ -15,7 +15,7 @@ Up to 15 answers may go on following lines (shift-enter or ctrl-enter or return 
 For example:
 
 \`\`\`
-/break What time should we meet?
+/inorout What time should we meet?
 10:30AM PST
 2:00PM PST
 :no_entry: never
@@ -28,7 +28,7 @@ Choose a button option and results are aggregated under the question.
 Like this! https://goo.gl/ucnthN
 `
 
-  slapp.command('/break', /^\s*help\s*$/, (msg) => {
+  slapp.command('/inorout', /^\s*help\s*$/, (msg) => {
     msg.respond(help)
   })
 
