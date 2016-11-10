@@ -8,6 +8,42 @@ module.exports = (slapp) => {
     msg.respond(help)
   })
 
+  slapp.command('/break', /.*/, (msg, text, match1) => {
+    msg.respond({
+      text: 'What would you like to do?',
+      attachments: [
+        {
+          text: '',
+          callback_id: 'what_would_you_like_to_do',
+          actions: [
+            {
+              "name": "answer",
+              "text": "Play Foos",
+              "type": "button",
+              "value": "foos"
+            },
+            {
+              "name": "answer",
+              "text": "Play Snakes & Ladders",
+              "type": "button",
+              "value": "snakes"
+            },
+            {
+              "name": "answer",
+              "text": "Play Shuffleboard",
+              "type": "button",
+              "value": "shuffleboard"
+            }
+          ]
+        }
+      ]
+    })
+  })
+
+  slapp.action('what_would_you_like_to_do', 'answer', (msg, val) => {
+    msg.respond('You want to play' + val)
+  })
+
   slapp.event('bb.team_added', function (msg) {
     slapp.client.im.open({ token: msg.meta.bot_token, user: msg.meta.user_id }, (err, data) => {
       if (err) {
