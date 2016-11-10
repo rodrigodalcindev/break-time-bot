@@ -41,8 +41,8 @@ module.exports = (slapp) => {
     })
   })
 
-  slapp.action('what_would_you_like_to_do', 'answer', (msg, val) => {
-    msg.respond(msg.body.user.name + ' wants to play' + val)
+  slapp.action('what_would_you_like_to_do', 'answer', (msg, val, text) => {
+    msg.respond(msg.body.user.name + ' wants to ' + text)
   })
 
   slapp.event('bb.team_added', function (msg) {
