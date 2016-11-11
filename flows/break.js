@@ -21,25 +21,25 @@ module.exports = (slapp) => {
               "name": "answer",
               "text": "Play Foos",
               "type": "button",
-              "value": "play foos"
+              "value": "playing foos"
             },
             {
               "name": "answer",
               "text": "Play Snakes & Ladders",
               "type": "button",
-              "value": "play Snakes & Ladders"
+              "value": "playing Snakes & Ladders"
             },
             {
               "name": "answer",
               "text": "Play Shuffleboard",
               "type": "button",
-              "value": "play shuffleboard"
+              "value": "playing shuffleboard"
             },
             {
               "name": "answer",
               "text": "Go for a walk",
               "type": "button",
-              "value": "go for a walk"
+              "value": "going for a walk"
             }
           ]
         }
@@ -48,7 +48,28 @@ module.exports = (slapp) => {
   })
 
   slapp.action('what_would_you_like_to_do', 'answer', (msg, val) => {
-    msg.respond(msg.body.user.name + ' wants to ' + val + '.')
+    msg.respond({
+      text: msg.body.user.name + ' feels like taking a break and ' + val + '.',
+      response_type: 'in_channel',
+      attachments: [
+        {
+          text: '',
+          callback_id: 'join_the_break',
+          actions: [
+            {
+              "name": "answer",
+              "text": "Join the break",
+              "type": "button",
+              "value": val
+            }
+          ]
+        }
+      ]
+    })
+  })
+
+  slapp.action('join_the_break', 'answer', (msg, val) => {
+    msg.respond(msg.body.user.name + ' joined the break.')
   })
 
   slapp.event('bb.team_added', function (msg) {
