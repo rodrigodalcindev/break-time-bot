@@ -69,7 +69,13 @@ module.exports = (slapp) => {
   })
 
   slapp.action('join_the_break', 'answer', (msg, val) => {
-    msg.respond(msg.body.user.name + ' joined the break.')
+    var orig = msg.body.original_message
+    var user = msg.body.user.name
+    var newAttachment = {
+      text: '@' + msg.body.user.name + ' joined the break.'
+    }
+    orig.attachments.push(newAttachment)
+    msg.respond(msg.body.response_url, orig)
   })
 
   slapp.event('bb.team_added', function (msg) {
