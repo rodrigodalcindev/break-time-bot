@@ -4,6 +4,8 @@ module.exports = (slapp) => {
 
   let help = `Break Time is pretty simple to use. If you feel like inviting co-workers to take a fun break type the \`/break\` command.`
 
+  let breakes = []
+
   slapp.command('/break', /^\s*help\s*$/, (msg) => {
     msg.respond(help)
   })
@@ -71,12 +73,18 @@ module.exports = (slapp) => {
   slapp.action('join_break_request', 'answer', (msg, val) => {
     var orig = msg.body.original_message
     var user = msg.body.user.name
-    var breakActivity = val.split(' with ')[1]
+    var breakActivity = val.split(' with ')[0]
     var breakRequester = val.split(' with ')[1]
 
     if (user == breakRequester) {
       msg.respond({
-        text: "This break was originally request by you.",
+        text: "This break was originally requested by you.",
+        response_type: 'ephemeral',
+        "replace_original": false
+      })
+    } else if (breakers.indexOf(user) > -1) {
+      msg.respond({
+        text: "You've already joined this break.",
         response_type: 'ephemeral',
         "replace_original": false
       })
@@ -84,6 +92,7 @@ module.exports = (slapp) => {
       var newAttachment = {
         text: '@' + msg.body.user.name + ' joined the break.'
       }
+      breakers.push(msg.body.user.name)
       orig.attachments.push(newAttachment)
       msg.respond(msg.body.response_url, orig)
     }
