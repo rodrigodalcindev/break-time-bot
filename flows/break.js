@@ -4,7 +4,7 @@ module.exports = (slapp) => {
 
   let help = `Break Time is pretty simple to use. If you feel like inviting co-workers to take a fun break type the \`/break\` command.`
 
-  let breakes = []
+  let breakers = []
 
   slapp.command('/break', /^\s*help\s*$/, (msg) => {
     msg.respond(help)
@@ -82,7 +82,7 @@ module.exports = (slapp) => {
         response_type: 'ephemeral',
         "replace_original": false
       })
-    } else if (breakers.indexOf(user) > -1) {
+    } else if (breakers.indexOf(user) != -1) {
       msg.respond({
         text: "You've already joined this break.",
         response_type: 'ephemeral',
