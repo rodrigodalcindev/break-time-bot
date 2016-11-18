@@ -15,7 +15,7 @@ module.exports = (slapp) => {
       attachments: [
         {
           text: '',
-          callback_id: 'what_would_you_like_to_do',
+          callback_id: 'handle_break_request',
           actions: [
             {
               "name": "answer",
@@ -47,20 +47,20 @@ module.exports = (slapp) => {
     })
   })
 
-  slapp.action('what_would_you_like_to_do', 'answer', (msg, val) => {
+  slapp.action('handle_break_request', 'answer', (msg, val) => {
     msg.respond({
       text: msg.body.user.name + ' feels like taking a break and ' + val + '.',
       response_type: 'in_channel',
       attachments: [
         {
           text: '',
-          callback_id: 'join_the_break',
+          callback_id: 'join_break_request',
           actions: [
             {
               "name": "answer",
               "text": "Join the break",
               "type": "button",
-              "value": val
+              "value": val + ' with ' + msg.body.user.name
             }
           ]
         }
@@ -68,14 +68,25 @@ module.exports = (slapp) => {
     })
   })
 
-  slapp.action('join_the_break', 'answer', (msg, val) => {
+  slapp.action('join_break_request', 'answer', (msg, val) => {
     var orig = msg.body.original_message
     var user = msg.body.user.name
-    var newAttachment = {
-      text: '@' + msg.body.user.name + ' joined the break.'
+    var breakActivity = val.split(' with ')[1]
+    var breakRequester = val.split(' with ')[1]
+
+    if (user == breakRequester) {
+      msg.respond({
+        text: "This break was originally request by you.",
+        response_type: 'ephemeral',
+        "replace_original": false
+      })
+    } else {
+      var newAttachment = {
+        text: '@' + msg.body.user.name + ' joined the break.'
+      }
+      orig.attachments.push(newAttachment)
+      msg.respond(msg.body.response_url, orig)
     }
-    orig.attachments.push(newAttachment)
-    msg.respond(msg.body.response_url, orig)
   })
 
   slapp.event('bb.team_added', function (msg) {
