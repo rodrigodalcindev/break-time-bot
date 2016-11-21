@@ -6,6 +6,22 @@ module.exports = (slapp) => {
 
   let breakers = []
 
+  function limitReached(breakers,breakActivity) {
+    switch (breakActivity) {
+      case "playing foos":
+        breakers.length == 2
+        break
+      case "playing shuffleboard":
+        breakers.length == 1
+        break
+      case "playing Snakes & Ladders":
+        breakers.length == 1
+        break
+      default:
+        false
+    }
+  }
+
   slapp.command('/break', /^\s*help\s*$/, (msg) => {
     msg.respond(help)
   })
@@ -72,29 +88,48 @@ module.exports = (slapp) => {
 
   slapp.action('join_break_request', 'answer', (msg, val) => {
     var orig = msg.body.original_message
-    var user = msg.body.user.name
+    var breakParticipant = msg.body.user.name
     var breakActivity = val.split(' with ')[0]
-    var breakRequester = val.split(' with ')[1]
+    var breakProponent = val.split(' with ')[1]
 
-    if (user == breakRequester) {
+    if (breakParticipant == breakProponent) {
       msg.respond({
         text: "This break was originally requested by you.",
         response_type: 'ephemeral',
         "replace_original": false
       })
-    } else if (breakers.indexOf(user) != -1) {
+    } else if (breakers.indexOf(breakParticipant) != -1) {
       msg.respond({
         text: "You've already joined this break.",
         response_type: 'ephemeral',
         "replace_original": false
       })
     } else {
-      var newAttachment = {
-        text: '@' + msg.body.user.name + ' joined the break.'
+      breakers.push(breakParticipant)
+
+      if (limitReached(breakers,breakActivity)) {
+        breakParticipants = '@' + breakProponent
+
+        for (var i = 0; i < breakers.length; i++) {
+          if (i == (breakers.length - 1)) {
+            breakParticipants += (' and ' + breakers[i])
+          } else {
+            breakParticipants += (', @' + breakers[i])
+          }
+        }
+
+        msg.respond({
+          text: breakParticipants + " are " + breakActivity + ". Enjoy! :smile:",
+          response_type: 'in_channel',
+          "replace_original": true
+        })
+      } else {
+        var newAttachment = {
+          text: '@' + breakParticipant + ' joined the break.'
+        }
+        orig.attachments.push(newAttachment)
+        msg.respond(msg.body.response_url, orig)
       }
-      breakers.push(msg.body.user.name)
-      orig.attachments.push(newAttachment)
-      msg.respond(msg.body.response_url, orig)
     }
   })
 
