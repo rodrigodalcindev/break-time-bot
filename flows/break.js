@@ -29,7 +29,7 @@ module.exports = (slapp) => {
   slapp.command('/break', /.*/, (msg, text, match1) => {
     msg.respond({
       text: 'What would you like to do?',
-      response_type: 'in_channel',
+      response_type: 'ephemeral',
       attachments: [
         {
           text: '',
