@@ -107,12 +107,29 @@ module.exports = (slapp) => {
     } else {
       breakers.push(breakParticipant)
 
+      breakParticipants = '@' + breakProponent
+
+      for (var i = 0; i < breakers.length; i++) {
+        if (i == (breakers.length - 1)) {
+          breakParticipants += (' and @' + breakers[i])
+        } else {
+          breakParticipants += (', @' + breakers[i])
+        }
+      }
+
+      msg.respond({
+        text: breakParticipants + " are " + breakActivity + ". Enjoy! :smile:",
+        response_type: 'in_channel',
+        "replace_original": true
+      })
+
+      /*
       if (limitReached(breakers,breakActivity)) {
         breakParticipants = '@' + breakProponent
 
         for (var i = 0; i < breakers.length; i++) {
           if (i == (breakers.length - 1)) {
-            breakParticipants += (' and ' + breakers[i])
+            breakParticipants += (' and @' + breakers[i])
           } else {
             breakParticipants += (', @' + breakers[i])
           }
@@ -130,6 +147,7 @@ module.exports = (slapp) => {
         orig.attachments.push(newAttachment)
         msg.respond(msg.body.response_url, orig)
       }
+      */
     }
   })
 
