@@ -118,7 +118,7 @@ module.exports = (slapp) => {
           }
         }
 
-        msg.say({
+        msg.respond({
           text: breakParticipants + " are " + breakActivity + ". Enjoy! :smile:",
           response_type: 'in_channel',
           "replace_original": true
@@ -128,7 +128,7 @@ module.exports = (slapp) => {
           text: '@' + breakParticipant + ' joined the break.'
         }
         orig.attachments.push(newAttachment)
-        msg.say(msg.body.response_url, orig)
+        msg.respond(msg.body.response_url, orig)
       }
     }
   })
