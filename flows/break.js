@@ -98,7 +98,7 @@ module.exports = (slapp) => {
         response_type: 'ephemeral',
         "replace_original": false
       })
-    } else if (breakers.indexOf(breakParticipant)) {
+    } else if (breakers.indexOf(breakParticipant) != -1) {
       msg.respond({
         text: "You've already joined this break.",
         response_type: 'ephemeral',
