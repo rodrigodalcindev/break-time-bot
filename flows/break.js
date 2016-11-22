@@ -66,7 +66,7 @@ module.exports = (slapp) => {
   })
 
   slapp.action('handle_break_request', 'answer', (msg, val) => {
-    msg.respond({
+    msg.say({
       text: msg.body.user.name + ' feels like taking a break and ' + val + '.',
       response_type: 'in_channel',
       attachments: [
@@ -118,7 +118,7 @@ module.exports = (slapp) => {
           }
         }
 
-        msg.respond({
+        msg.say({
           text: breakParticipants + " are " + breakActivity + ". Enjoy! :smile:",
           response_type: 'in_channel',
           "replace_original": true
@@ -128,7 +128,7 @@ module.exports = (slapp) => {
           text: '@' + breakParticipant + ' joined the break.'
         }
         orig.attachments.push(newAttachment)
-        msg.respond(msg.body.response_url, orig)
+        msg.say(msg.body.response_url, orig)
       }
     }
   })
