@@ -9,16 +9,16 @@ module.exports = (slapp) => {
   function limitReached(breakers,breakActivity) {
     switch (breakActivity) {
       case "playing foos":
-        breakers.length == 2
+        return breakers.length == 2
         break
       case "playing shuffleboard":
-        breakers.length == 1
+        return breakers.length == 1
         break
       case "playing Snakes & Ladders":
-        breakers.length == 1
+        return breakers.length == 1
         break
       default:
-        false
+        return false
     }
   }
 
