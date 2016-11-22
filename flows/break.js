@@ -107,7 +107,7 @@ module.exports = (slapp) => {
     } else {
       breakers.push(breakParticipant)
 
-      breakParticipants = '@' + breakProponent
+      var breakParticipants = '@' + breakProponent
 
       for (var i = 0; i < breakers.length; i++) {
         if (i == (breakers.length - 1)) {
