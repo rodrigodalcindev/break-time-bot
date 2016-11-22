@@ -92,25 +92,21 @@ module.exports = (slapp) => {
     var breakActivity = val.split(' with ')[0]
     var breakProponent = val.split(' with ')[1]
 
-    breakers.push(breakParticipant)
-
     if (breakParticipant == breakProponent) {
-      breakers.pop(breakParticipant)
-
       msg.respond({
         text: "This break was originally requested by you.",
         response_type: 'ephemeral',
         "replace_original": false
       })
-    } else if (breakers.indexOf(breakParticipant) != -1 && !limitReached(breakers,breakActivity)) {
-      breakers.pop(breakParticipant)
-
+    } else if (breakers.indexOf(breakParticipant)) {
       msg.respond({
         text: "You've already joined this break.",
         response_type: 'ephemeral',
         "replace_original": false
       })
     } else {
+      breakers.push(breakParticipant)
+
       if (limitReached(breakers,breakActivity)) {
         breakParticipants = '@' + breakProponent
 
