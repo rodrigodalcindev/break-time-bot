@@ -41,7 +41,7 @@ module.exports = (slapp) => {
             },
             {
               "name": "answer",
-              "text": "Play Snakes &amp; Ladders",
+              "text": "Play Snakes & Ladders",
               "type": "button",
               "value": "playing Snakes &amp; Ladders"
             },
