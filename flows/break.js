@@ -15,6 +15,9 @@ module.exports = (slapp) => {
       case "playing Snakes and Ladders":
         return breakers.length == 1
         break
+      case "going for a walk":
+        return breakers.length == 4
+        break
       default:
         return false
     }
