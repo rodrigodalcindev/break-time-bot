@@ -125,7 +125,7 @@ module.exports = (slapp) => {
         })
       } else {
         var newAttachment = {
-          text: '@' + breakParticipant + ' joined the break.'
+          text: breakActivity + ' ' + breakProponent
         }
         orig.attachments.push(newAttachment)
         msg.respond(msg.body.response_url, orig)
