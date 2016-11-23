@@ -12,7 +12,7 @@ module.exports = (slapp) => {
       case "playing shuffleboard":
         return breakers.length == 1
         break
-      case "playing Snakes &amp; Ladders":
+      case "playing Snakes and Ladders":
         return breakers.length == 1
         break
       default:
@@ -41,9 +41,9 @@ module.exports = (slapp) => {
             },
             {
               "name": "answer",
-              "text": "Play Snakes & Ladders",
+              "text": "Play Snakes and Ladders",
               "type": "button",
-              "value": "playing Snakes &amp; Ladders"
+              "value": "playing Snakes and Ladders"
             },
             {
               "name": "answer",
