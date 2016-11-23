@@ -4,8 +4,6 @@ module.exports = (slapp) => {
 
   let help = `Break Time is pretty simple to use. If you feel like inviting co-workers to take a fun break type the \`/break\` command.`
 
-  let breakers = []
-
   function limitReached(breakers,breakActivity) {
     switch (breakActivity) {
       case "playing foos":
@@ -87,6 +85,7 @@ module.exports = (slapp) => {
   })
 
   slapp.action('join_break_request', 'answer', (msg, val) => {
+    var breakers = []
     var orig = msg.body.original_message
     var breakParticipant = msg.body.user.name
     var breakActivity = val.split(' with ')[0]
