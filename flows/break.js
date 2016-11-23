@@ -12,7 +12,7 @@ module.exports = (slapp) => {
       case "playing shuffleboard":
         return breakers.length == 1
         break
-      case "playing Snakes & Ladders":
+      case "playing Snakes &amp; Ladders":
         return breakers.length == 1
         break
       default:
@@ -41,9 +41,9 @@ module.exports = (slapp) => {
             },
             {
               "name": "answer",
-              "text": "Play Snakes & Ladders",
+              "text": "Play Snakes &amp; Ladders",
               "type": "button",
-              "value": "playing Snakes & Ladders"
+              "value": "playing Snakes &amp; Ladders"
             },
             {
               "name": "answer",
@@ -124,7 +124,7 @@ module.exports = (slapp) => {
         })
       } else {
         var newAttachment = {
-          text: breakActivity + ' ' + breakProponent
+          text: '@' + breakParticipant + ' joined the break!'
         }
         orig.attachments.push(newAttachment)
         msg.respond(msg.body.response_url, orig)
