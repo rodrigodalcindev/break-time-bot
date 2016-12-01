@@ -7,7 +7,7 @@ module.exports = (slapp) => {
   function limitReached(breakers,breakActivity) {
     switch (breakActivity) {
       case "playing foos":
-        return breakers.length == 2
+        return breakers.length == 3
         break
       case "playing shuffleboard":
         return breakers.length == 1
